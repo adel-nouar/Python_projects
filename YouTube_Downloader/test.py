@@ -1,6 +1,21 @@
-from pytube import Playlist
+# Prérequis: installer la librairie pytube, 2 méthodes possibles:
+# 1) # Peut-être pas la dernière version
+#       pip install pytube 
+# 2) Dernière version à partir du github
+#       python -m pip install git+https://github.com/pytube/pytube
+from pytube import YouTube
 
-p = Playlist('https://www.youtube.com/playlist?list=PLS1QulWo1RIaJECMeUT4LFwJ-ghgoSH6n')
+# Contiendra l'url de la vidéo YouTube
+url_video_youtube = ''
 
-for url in p.video_urls[:3]:
-    print(url)
+# On crée l'objet à partir de l'url
+video_youtube = YouTube(url_video_youtube)
+
+# Récupération du stream ayant la meilleure résolution
+# par défaut, et généralement cette résolution est à 720p max
+stream = video_youtube.streams.get_highest_resolution()
+
+
+# Lancement du téléchargement de la vidéo
+stream.download()
+
