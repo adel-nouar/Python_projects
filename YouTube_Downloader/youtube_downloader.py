@@ -8,9 +8,10 @@ import os
 
 def on_download_progress(stream, chunk, bytes_remaining):
     bytes_downloaded = stream.filesize - bytes_remaining
-    percent = bytes_downloaded * 100 / stream.filesize
-
-    print(f'Progression de téléchargement : {int(percent)}%')
+    percent = 100 * (bytes_downloaded / float(stream.filesize))
+    bar = '█' * int(percent) + '' * (100 - int(percent))
+    # print(f'Progression de téléchargement : {int(percent)}%')
+    print(f"\r|{bar}| {percent:.2f}%", end="\r")
 
 
 def download_video(url):
